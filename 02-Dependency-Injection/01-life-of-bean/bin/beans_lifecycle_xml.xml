@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- <bean id="car_custom_init" class="com.beans.Car_Custom_Init" init-method="myCustomInitCar" destroy-method="myCustomDestroyCar">
+		<property name="chassisNumber" value="eng123" />
+		<property name="color" value="baker's pink" />
+		<property name="fuelType" value="petrol" />
+		<property name="average" value="12.50" />
+		<property name="price" value="643800" />
+	</bean> -->
+	
+	<bean id="car_api_init" class="com.beans.Car_API_Init">
+		<property name="chassisNumber" value="eng324" />
+		<property name="color" value="baker's blue" />
+		<property name="fuelType" value="petrol" />
+		<property name="average" value="12.50" />
+		<property name="price" value="643800" />
+	</bean>
+	
+	<bean id="myBean" class="com.contextAware.MyBean" />
+	
+	<bean id="beanPostProcessor" class="com.processor.Demo_BeanPostProcessor" />
+
+</beans>
