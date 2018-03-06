@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Set abstract attribute equals true to enable to create a instance  -->
+	<bean id="student" class="com.beans.Student" abstract="true">
+		<property name="rollNo" value="22" />
+		<property name="name" value="Ocean" />
+	</bean>
+
+	<bean id="engg_old" class="com.beans.EnggStudent">
+		<property name="rollNo" value="22" />
+		<property name="name" value="Ocean" />
+		<property name="branchCode" value="Comp230" />
+		<property name="collegeCode" value="Clg_Eng_045" />
+	</bean>
+
+	<!-- Specify inherit from 'student' by parent attribute  -->
+	<bean id="engg_new" class="com.beans.EnggStudent" parent="student">
+		<property name="branchCode" value="Comp230" />
+		<property name="collegeCode" value="Clg_Eng_045" />
+	</bean>
+
+	<bean id="engg_new1" class="com.beans.EnggStudent" parent="student">
+		<property name="name" value="Nguyen Dai Duong" />
+		<property name="branchCode" value="Comp230" />
+		<property name="collegeCode" value="Clg_Eng_045" />
+	</bean>
+</beans>

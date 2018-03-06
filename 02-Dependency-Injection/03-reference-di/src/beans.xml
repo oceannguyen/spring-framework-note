@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="address1" class="com.beans.Address">
+    	<property name="cityName" value="Ha Noi" />
+    	<property name="buildNo" value="1000" />
+    	<property name="pinCode" value="084" />
+    </bean>
+    
+    <bean id="address2" class="com.beans.Address">
+    	<property name="cityName" value="Silicon Valley" />
+    	<property name="buildNo" value="9999" />
+    	<property name="pinCode" value="123" />
+    </bean>
+    
+    <bean id="cust_setter_di" class="com.beans.Customer">
+    	<property name="custName" value="Ocean Nguyen" />
+    	<property name="custId" value="1" />
+    	<property name="custAddress" ref="address1" />
+    </bean>
+    
+    <bean id="cust_constuctor_di" class="com.beans.Customer">
+    	<constructor-arg value="2" index="1" />
+    	<constructor-arg value="Nguyen Dai Duong" index="0" />
+    	<constructor-arg ref="address2" index="2" />
+    </bean>
+    
+    
+</beans>

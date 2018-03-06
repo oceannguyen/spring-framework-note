@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- To auto scan components -->
+	<context:annotation-config />
+	<!-- Specify where to scan components -->
+	<!-- Here for this example, all the subpackages of com.streotype will be 
+		scanned to find out the bean which has id as customer_Component -->
+	<context:component-scan base-package="com.stereotype.*"></context:component-scan>
+
+	<context:component-scan base-package="com.autowiring.*"></context:component-scan>
+	
+	<context:component-scan base-package="com.scope.*"></context:component-scan>
+
+	<bean id="cust_address" class="com.beans.Address">
+		<property name="buildNo" value="2" />
+		<property name="cityName" value="TP. HCM" />
+		<property name="pinCode" value="123" />
+	</bean>
+
+	<bean id="address" class="com.beans.Address">
+		<property name="buildNo" value="2" />
+		<property name="cityName" value="Pune" />
+		<property name="pinCode" value="123" />
+	</bean>
+
+</beans>

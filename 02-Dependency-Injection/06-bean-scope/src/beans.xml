@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- The default bean scope is singleton -->
+	<bean id="car_default_scope" class="com.beans.Car">
+		<property name="chassisNumber" value="eng2012" />
+		<property name="color" value="baker's chocolate" />
+		<property name="fuelType" value="petrol" />
+		<property name="price" value="643800" />
+		<property name="average" value="12.50" />
+	</bean>
+	
+	<!-- Set bean scope is prototype -->
+	<bean id="car_new" class="com.beans.Car" scope="prototype">
+		<property name="chassisNumber" value="eng2012" />
+		<property name="color" value="baker's chocolate" />
+		<property name="fuelType" value="petrol" />
+		<property name="price" value="643800" />
+		<property name="average" value="12.50" />
+	</bean>
+	
+</beans>

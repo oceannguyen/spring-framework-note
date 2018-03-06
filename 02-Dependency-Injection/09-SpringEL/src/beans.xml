@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="cust_address" class="com.beans.Address">
+		<property name="cityName" value="Ha Noi" />
+		<property name="buildNo" value="1000" />
+		<property name="pinCode" value="084" />
+	</bean>
+
+	<bean id="cust_new" class="com.beans.Customer">
+		<property name="custName" value="Bina" />
+		<property name="custId" value="#{2}" />
+		<property name="prodName" value="#{'Samsung Fridge'}" />
+		<property name="prodPrice" value="#{27670.50}" />
+		<property name="secondHanded" value="#{false}" />
+	</bean>
+
+	<bean id="cust_ref" class="com.beans.Customer_Reference">
+		<property name="custName" value="Bina" />
+		<property name="custId" value="#{2}" />
+		<property name="custAddress" value="#{cust_address}" />
+	</bean>
+	
+	<bean id="cust_ref_new" class="com.beans.Customer_Reference">
+		<property name="custName" value="#{cust_ref.custName.toUpperCase()}" />
+		<property name="custId" value="#{2}" />
+		<property name="custAddress" value="#{cust_address}" />
+	</bean>
+
+	<bean id="cust_calculation" class="com.beans.Customer">
+		<property name="custName" value="Bina" />
+		<property name="custId" value="#{2}" />
+		<property name="prodName" value="#{'Samsung Fridge'}" />
+		<property name="prodPrice" value="#{27670.50*12.5}" />
+		<property name="secondHanded" value="#{cust_calculation.prodPrice > 25000}" />
+	</bean>
+
+</beans>
