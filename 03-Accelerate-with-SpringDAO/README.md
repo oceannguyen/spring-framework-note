@@ -34,7 +34,7 @@ The **DataSource** facilitates handling of connection with the database, so it n
 - Case 1 - Using XML configuration of DriverManagerDataSource
 - Case 2 - Using annotations for DriverManagerDataSource
 
-[Using DataSource][]
+[Using DataSource](https://github.com/oceannguyen/spring-framework-note/tree/master/03-Accelerate-with-SpringDAO/ch03-01-DataSourceConfiguration)
 
 ### Using template classes to perform JDBC operations
 
@@ -48,6 +48,6 @@ Template classes provide an abstract way to define operations by getting rid of 
 
 **NamedParamterJdbcTemplate**, which facilitates the use of named parameters to specify the parameters in SQL. Each parameter will have a named prefixed with a colon(:)
 
-[Using JdbcTemplate and NamedParameterJdbcTemplate]()
+[Using JdbcTemplate and NamedParameterJdbcTemplate](https://github.com/oceannguyen/spring-framework-note/tree/master/03-Accelerate-with-SpringDAO/ch03-02-JdbcTemplate)
 
 
