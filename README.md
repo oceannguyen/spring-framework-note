@@ -9,3 +9,4 @@ Tài liệu này được thiết kế phù hợp với người mới cũng nh�
 - [javax.inject](https://javalibs.com/artifact/javax.inject/javax.inject)
 - [Spring 5.0 RC1](https://javalibs.com/search?searchFor=everything&q=spring)
 - [MySQL connector 5.1.12](https://javalibs.com/artifact/mysql/mysql-connector-java)
+- [Hibernate](http://hibernate.org/orm/releases/)
