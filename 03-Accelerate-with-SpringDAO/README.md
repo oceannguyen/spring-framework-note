@@ -12,5 +12,5 @@ In this chapter, we will cover the following topics:
 > Configuring cache manager to enable the support of caching the data
 
 ### Contents
-- [Handling Database]()
-- [Object Relation Mapping]()
+- [Handling Database](handling-database.md)
+- [Object Relation Mapping](object-relation-mapping.md)
