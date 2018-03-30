@@ -202,6 +202,7 @@ Dưới đây là những annotations thường được sử dụng:
 | @Size | This ensures that the annotated element is between the maximum and minimum values |
 
 Những annotations được cung cấp bởi Hibernate Validator:
+
 | Annotations | Description |
 | --- | --- |
 | @CreditCardNumber | This checks that the annotated value follows the character sequence passed to it |
