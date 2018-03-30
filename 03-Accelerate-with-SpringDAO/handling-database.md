@@ -27,7 +27,9 @@ In a Java application, developers generally use the concept of utility class to 
         </bean> 
 ```
 
->**SingleConnectionDataSource** is suitable for small, single-threaded applications. **DriverManagerDataSource** supports multithreaded applications. The **DriverManagerDataSource** is not a pooled **DataSource**, and it needs to be managed carefully for handling multiple connections. It ultimately hampers the application performance. It's recommended to use a pooled data source for better performance.
+>**SingleConnectionDataSource** is suitable for small, single-threaded applications. 
+
+>**DriverManagerDataSource** supports multithreaded applications. The **DriverManagerDataSource** is not a pooled **DataSource**, and it needs to be managed carefully for handling multiple connections. It ultimately hampers the application performance. It's recommended to use a pooled data source for better performance.
 
 The **DataSource** facilitates handling of connection with the database, so it needs to be injected in the module.
 
