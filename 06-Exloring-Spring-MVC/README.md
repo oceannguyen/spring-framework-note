@@ -99,16 +99,17 @@ Trên form submission, các giá trị được nhập bởi người dùng có 
     <td width="50%" align="right">Price of the Book</td> 
     <td width="50%" align="left"> 
       <form:select path="price"> 
-    <!- 
+    <!--
       We will add the code to have predefined values here  
     --> 
       </form:select> 
     </td> 
   </tr> 
   <tr> 
-    <!-add the code to accept description, publication as
+    <!--add the code to accept description, publication as
     discussed here. You can refer the complete code from the
     link (....) 
+    -->
   </tr>
   </table> 
 </form:form>
@@ -192,19 +193,19 @@ Dưới đây là những annotations thường được sử dụng:
 | @NotNull | This checks whether the annotated value is not null, but it cannot check for empty strings|
 | @Null | This checks whether the annotated value is null |
 | @Pattern | This checks whether the annotated string matches the given regular expression or not |
-| @Past: This checks whether the annotated value is a date in the past |
-| @Future: This checks whether the annotated value is a date in the future |
-| @Min: This makes sure that the annotated element is a number whose value is equal to or greater than the specified value |
-| @Max: This makes sure that the annotated element is a number whose value is equal to or less than the specified value |
-| @AssertFalse: This ensures that the annotated element is false |
-| @AssertTrue: This ensures that the annotated element is true |
-| @Size: This ensures that the annotated element is between the maximum and minimum values |
+| @Past | This checks whether the annotated value is a date in the past |
+| @Future | This checks whether the annotated value is a date in the future |
+| @Min | This makes sure that the annotated element is a number whose value is equal to or greater than the specified value |
+| @Max | This makes sure that the annotated element is a number whose value is equal to or less than the specified value |
+| @AssertFalse | This ensures that the annotated element is false |
+| @AssertTrue | This ensures that the annotated element is true |
+| @Size | This ensures that the annotated element is between the maximum and minimum values |
 
 Những annotations được cung cấp bởi Hibernate Validator:
 | Annotations | Description |
 | --- | --- |
 | @CreditCardNumber | This checks that the annotated value follows the character sequence passed to it |
 | @Email | This is used to check whether the specified character follows a valid e-mail address according to the specified expression |
-| @Length: This checks whether the annotated element has a number of characters limited by the minimum and maximum attributes specified by the annotation |
-| @NotBlank: This checks for the annotated element that is not null, and has a length greater than zero |
-| @NotEmpty: This makes sure that the annotated element is neither null nor empty |
+| @Length | This checks whether the annotated element has a number of characters limited by the minimum and maximum attributes specified by the annotation |
+| @NotBlank | This checks for the annotated element that is not null, and has a length greater than zero |
+| @NotEmpty | This makes sure that the annotated element is neither null nor empty |
