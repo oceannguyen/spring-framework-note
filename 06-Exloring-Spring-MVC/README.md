@@ -136,8 +136,7 @@ Khi người dùng submit form, các giá trị được nhập sẽ được b�
 
 Trong một số trường hợp, form chứa các giá trị được định nghĩa trước, ví dụ như countries hoặc book categories. Những giá trị đó có thể được hardcode dẫn đến phải thay đổi liên tục. Thay vì phải làm như vậy, Spring hỗ trợ *form preprocessing* được thực hiện trong 2 bước:
 
-- Defining the attribute with values to add in the view
-cú pháp như sau:
+- Defining the attribute with values to add in the view:
 
 ```html
 @ModelAttribute("name_of_the_attribute") 
@@ -156,8 +155,7 @@ public List<Hobby>addAttribute() {
 } 
 ```
 
-- Populating the values of the attribute in the form
-cú pháp như sau:
+- Populating the values of the attribute in the form:
 
 ```html
 <form:name-of_tag path="name_of_data_memeber_of_bean" 
