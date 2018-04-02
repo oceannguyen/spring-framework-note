@@ -256,7 +256,7 @@ Làm sao để nhận biết rằng phiên làm việc người dùng có liên 
 
 Spring cung cấp Spring-related configuration để quản lý một phiên trong các phiên bản khác nhau:
 
-> Session creation: Có thể cấu hình như sau:
+> **Session creation**: Có thể cấu hình như sau:
 
 ```java
 <http create-session="XXX"> 
