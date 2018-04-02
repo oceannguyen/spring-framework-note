@@ -271,7 +271,7 @@ Thuộc tính ```create-session``` có thể là các giá trị sau:
 | Stateless | Spring Security will not create as well use a session |
 | Never | If a preexisted session is available, it will be used; however, if no session is available explicitly, a new session will not be created |
 
-> Concurrent session management: Đối khi, developers cần dừng việc tạo nhiều hơn một phiên với mỗi người dùng. Ta có thể cấu hình như sau:
+> **Concurrent session management**: Đôi khi, developers cần dừng việc tạo nhiều hơn một phiên với mỗi người dùng. Ta có thể cấu hình như sau:
 
 ```java
 <session-management> 
