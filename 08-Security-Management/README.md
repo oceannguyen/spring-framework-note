@@ -18,8 +18,8 @@ Sử dụng ```AuthenticationManager``` để cung cấp thông tin về các ro
 ### Adding security
 
 Chỉ định resources ta muốn giới hạn truy cập thông qua:
-* Thêm filter mapping cho DelegatingFilterProxy là một filter trong web.xml
-```java,xml
+* Thêm filter mapping cho ```DelegatingFilterProxy``` là một ```filter``` trong web.xml
+```java
 <filter>
     <filter-name>springSecurityFilterChain</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -29,7 +29,7 @@ Chỉ định resources ta muốn giới hạn truy cập thông qua:
     <url-pattern>/*</url-pattern>
 </filter-mapping>
 ```
-* Tạo file *spring-security.xml* trong thư mục WEB-INF để ánh xạ các ràng buộc security
+* Tạo file *spring-security.xml* trong thư mục ```WEB-INF``` để ánh xạ các ràng buộc security
 * Thêm basic ```<http``` element sau:
 ```java
 <security:http> 
@@ -68,9 +68,9 @@ Luồng của ứng dụng được được thực hiện như sau:
     <img src="security_1.png" />
 </div>
 
-Trên đây đã sử dụng basic authentication cho ta thấy phương hướng để add security vào trong ứng dụng như thế nào. Nhưng ta có thể tùy chỉnh được form đăng nhập không? Sau khi đăng nhập thành công/lỗi cần phải forward người dùng tới trang nào? Vì vậy tiếp sau đây sẽ giới thiệu về *form-based authentication* cho phép ta tùy chỉnh trang đăng nhập và một số luồng liên quan.
+Trên đây đã sử dụng ```basic authentication``` cho ta thấy phương hướng để add security vào trong ứng dụng như thế nào. Nhưng ta có thể tùy chỉnh được form đăng nhập không? Sau khi đăng nhập thành công/lỗi cần phải forward người dùng tới trang nào? Vì vậy tiếp sau đây sẽ giới thiệu về ```form-based authentication``` cho phép ta tùy chỉnh trang đăng nhập và một số luồng liên quan.
 
-- Để config theo *form-based authentication* ta update cấu hình như đã trình bày như sau:
+- Để config theo ```form-based authentication``` ta update cấu hình như đã trình bày như sau:
 ```java,xml
 <security:http> 
     <security:intercept-url pattern="/data.htm" 
@@ -82,13 +82,13 @@ Trên đây đã sử dụng basic authentication cho ta thấy phương hướn
 ```
 Trong đó:
 
-> Trang login sẽ được trả về là mylogin.htm
+> Trang login sẽ được trả về là ```mylogin.htm```
 
-> Trường hợp login sai trang sẽ trả về với url error.htm
+> Trường hợp login sai trang sẽ trả về với url ```error.htm```
 
 > ```csrf```: **cross-site request forgery** (CSRF) là disabled để ngăn chặn lỗ hổng tấn công dựa trên mượn quyền đăng nhập
 
-- Tiếp theo update controller như sau:
+- Tiếp theo update ```controller``` như sau:
 ```java,xml
 @RequestMapping("/mylogin.htm") 
 public ModelAndView login() 
@@ -129,7 +129,7 @@ public ModelAndView login_fail()
 </center> 
 ```
 
-Spring hỗ trợ nhiều các providers xác thực bên thứ 3 (third-party authentication provider) như LDAP và CAS. ```UserDetailsService``` được sử dụng để tìm kiếm username, password và ```GrantAuthoritieS```, được thực hiện qua việc so sánh username và password có được từ UsernamePasswordAuthenticationToken với username và password được load trong ```UserDetailsService```. Spring cung 2 implementation cho xác thực:
+Spring hỗ trợ nhiều các providers xác thực bên thứ 3 (third-party authentication provider) như ```LDAP``` và ```CAS```. ```UserDetailsService``` được sử dụng để tìm kiếm ```username```, ```password``` và ```GrantAuthoritieS```, được thực hiện qua việc so sánh username và password có được từ UsernamePasswordAuthenticationToken với username và password được load trong ```UserDetailsService```. Spring cung 2 implementation cho xác thực:
 
 > **In-memory authentication**
 
@@ -144,7 +144,7 @@ Tiện lợi trong trường hợp developers không muốn lãng phí thời gi
    <user name="xyz" password="xyz" authorities="ROLE_USER,ROLE_ADMIN" /> 
 </user-service> 
 ```
-Ngoài ra ta cũng có thể thực hiện tải các credentials và roles từ một file external properties.
+Ngoài ra ta cũng có thể thực hiện tải các credentials và roles từ một file ```external properties```.
 ```
 <user-service id="userDetailsService"   
   properties="myusers.properties"/> 
@@ -187,13 +187,13 @@ ALTER TABLE authorities ADD CONSTRAINT fk_authorities_users foreign key
 
 ### The Remember-Me authentication
 
-Trong một kịch bản websites cần nhớ identity của người dùng giữa các sessions. Việc này có thực hiện bằng việc add tính năng **remember-me**. Mặc định, Spring cho phép thêm tính năng remember-me qua việc thêm token dựa cookies đến response. remember-me cookie được add phía client, chứa các dữ liệu sau:
+Trong một kịch bản websites cần nhớ identity của người dùng giữa các sessions. Việc này có thực hiện bằng việc add tính năng **remember-me**. Mặc định, Spring cho phép thêm tính năng ```remember-me``` qua việc thêm ```token``` dựa trên ```cookies``` đến ```response```. ```remember-me cookie``` được add phía client, chứa các dữ liệu sau:
 * **username**: This is to identify the logged-in principal.
 * **expirationTime**: This is the time until the cookie will be available. The default is 2 weeks.
 * **MD5 hash**: This contains a combination of username and expirationTime, plus the password and the predefined key.
 
-Cấu hình remember-me được chỉ định theo:
-```
+Cấu hình ```remember-me``` được chỉ định theo:
+```java
 <security:remember-me remember-me-parameter="some_valid_name" 
   token-validity-seconds="validity_in_seconds"
   data-source-ref="if_for_dataSource_bean"_> 
@@ -201,9 +201,9 @@ Cấu hình remember-me được chỉ định theo:
 ```
 Trong đó:
 
-* **remember-me-parameter**: This is the name of the checkbox that we are using.
-* **token-validity-seconds**: This is the time in seconds, after which the remember-me cookie will expire.
-* **data-source-ref**: This attribute is used in case we want to store the information in the database. By default, the simple hash-based token approach is cookie-based.
+* **remember-me-parameter**: Tên thuộc tính trong ```checkbox``` input.
+* **token-validity-seconds**: Thời gian mà ```remember-me``` cookie tồn tại, tính theo đơn vị giây.
+* **data-source-ref**: Thuộc tính này được sử dụng trong trường hợp ta muốn lưu trữ thông tin trong dataase. *By default, the simple hash-based token approach is cookie-based*.
 
 - Update trong tag ```<http``` như sau:
 ```
@@ -230,29 +230,29 @@ Standard configuration để cấu hình logout trong ```<http>``` như sau:
   invalidate-session="invalidate_the_session_or_not"/> 
 ```
 Trong đó:
-* **logout-success-url**: This is the name of the page where the user will redirect
-* **delete-cookies**: This is the value that specifies to delete the cookies saved to the client or not after logging out
+* **logout-success-url**: Tên trang sẽ chuyển user tới
+* **delete-cookies**:  Chỉ định giá trị để xóa cookies đã được lưu phía client khi loggout.
 * **invalidate-session**: This is the attribute used to invalidate the session after logging out
 
 ## Managing the Session
 
 Người dùng có thể truy cập bao nhiêu phiên làm việc cùng một lúc với tài khoản của họ? Spring Session management cung cấp tính năng giúp 'ngăn' việc người dùng chia sẻ tài khoản của họ để truy cập cho nhiều nơi.
 
-Spring session management và HttpSession có điểm gì khác nhau:
-* Problems handling multiple accounts: Spring Framework cho phép tùy chỉnh để một người dùng có thể có nhiều phiên làm việc mà không phải login vào tài khoản khác.
+Spring session management và ```HttpSession``` có điểm gì khác nhau:
+* **Problems handling multiple accounts**: Spring Framework cho phép tùy chỉnh để một người dùng có thể có nhiều phiên làm việc mà không phải login vào tài khoản khác.
 
-* Multiple sessions per login: Quản lý phiên theo truyền thống (HttpSession) với tài khoản người dùng sử dụng một đăng nhập một người dùng khiến nó khó để duy trì nhiều roles. Người dùng phải login vào tài khoản khác để sử dụng role mong muốn.
+* **Multiple sessions per login**: Quản lý phiên theo truyền thống (```HttpSession```) với tài khoản người dùng sử dụng đăng nhập khó để duy trì nhiều roles. Người dùng phải login vào tài khoản khác để sử dụng role mong muốn.
 
-* Accessing session data: Spring cung cấp các APIs cho phép lấy thông tin phiên làm việc dựa trên ID của phiên.
+* **Accessing session data**: Spring cung cấp các APIs cho phép lấy thông tin phiên làm việc dựa trên ID của phiên.
 
 ## Working of the Spring session
 
 Sử dụng session để lưu trữ dữ liệu thế nào một cách hiệu quả và tin cậy thế nào?
-Làm sao để nhận biết rằng phiên làm việc người dùng có liên kết với request hay nói cách khác user đó quyền truy cập đến *incomming request* không?
+Làm sao để nhận biết rằng phiên làm việc người dùng có liên kết với ```request``` hay nói cách khác ```user``` đó quyền truy cập đến *incomming request* không?
 
-* The data store: Spring không định nghĩa cụ thể các *underlying data store* thay đó cung cấp các interfaces cho phép developer implementation. Những interfaces cung cấp để hỗ trợ lưu trữ dữ liệu là: ```Session```, ```ExpiringSession``` và ```SessionRepository```
+* **The data store**: Spring không định nghĩa cụ thể các *underlying data store* thay đó cung cấp các interfaces cho phép developer implementation. Những interfaces cung cấp để hỗ trợ lưu trữ dữ liệu là: ```Session```, ```ExpiringSession``` và ```SessionRepository```
 
-* The session determination: Luôn được liên kết với request để biết phiên làm việc nào được liên kết với *upcoming request* nào
+* **The session determination**: Luôn được liên kết với ```request``` để biết phiên làm việc nào được liên kết với *upcoming request* nào
 
 Spring cung cấp Spring-related configuration để quản lý một phiên trong các phiên bản khác nhau:
 
@@ -304,7 +304,7 @@ Có nghĩa rằng chỉ user có quyền được chỉ định mới được t
        //code goes here 
     } 
 ```
-Chức năng tương tự như @Secure nhưng @PreAuthorize và @PostAuthorize có thể sử dụng cùng với các biểu thức. Có một chút khác biệt với @PostAuthorize annotation là kiểm tra quyền sau khi thực hiện phương thức, VD: những bản ghi được tạo bởi UserA thì chỉ có UserA được quyền chỉnh sửa
+Chức năng tương tự như ```@Secure``` nhưng ```@PreAuthorize``` và ```@PostAuthorize``` có thể sử dụng cùng với các biểu thức. Có một chút khác biệt với ```@PostAuthorize``` ```annotation``` là kiểm tra quyền sau khi thực hiện phương thức, VD: những bản ghi được tạo bởi ```UserA``` thì chỉ có ```UserA``` được quyền chỉnh sửa
 
 ```java
 public interface UserService {
@@ -322,3 +322,13 @@ public interface UserService {
  
 }
 ```
+
+| Expression to use | When to use |
+| --- | --- |
+| hasRole(name_of the_role) | This is used to specify the role that can access the method. |
+| hasAnyRole(role1, role2) | This is used to specify multiple roles that can invoke the method. |
+| permitAll | This will allow all the users to invoke the method. |
+| denyAll | This will deny all the users to invoke the method. |
+| isRememberMe() | This is used to determine whether the user is a remember-me user. | 
+| isAuthenticated() | This is used to determine whether the user is anonymous or not. | 
+| hasPermission(target_object, permission_object) | This expression evaluates that the target object has the specified permissions whether to invoke the method or not. | 
