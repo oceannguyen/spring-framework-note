@@ -4,13 +4,13 @@ In a Java application, developers generally use the concept of utility class to 
 
 ### DataSource
 
-**DataSource** is the factory for data source connections similar to DriverManager in JDBC, which helps in connection management
+**DataSource** is the factory for data source connections similar to ```DriverManager``` in JDBC, which helps in connection management
 
->**With the help of the JDBC driver**: One can use the following class to configure the simplest way to get an object of **DataSource**:
+*With the help of the JDBC driver**: One can use the following class to configure the simplest way to get an object of **DataSource**:
 
-> **SingleConnectionDataSource**: As we already discussed, this returns a single connection
+    * **SingleConnectionDataSource**: As we already discussed, this returns a single connection
 
-> **DriverManagerDataSource**: This returns a new connection object on request
+    * **DriverManagerDataSource**: This returns a new connection object on request
 
 ```java
         <bean id="dataSource" 
@@ -48,7 +48,7 @@ Template classes provide an abstract way to define operations by getting rid of 
 
 ### NamedParameterJdbcTemplate
 
-**NamedParamterJdbcTemplate**, which facilitates the use of named parameters to specify the parameters in SQL. Each parameter will have a named prefixed with a colon(:)
+**NamedParamterJdbcTemplate**, which facilitates the use of named parameters to specify the parameters in SQL. Each parameter will have a named prefixed with a colon ```:```
 
 [Using JdbcTemplate and NamedParameterJdbcTemplate](https://github.com/oceannguyen/spring-framework-note/tree/master/03-Accelerate-with-SpringDAO/ch03-02-JdbcTemplate)
 
