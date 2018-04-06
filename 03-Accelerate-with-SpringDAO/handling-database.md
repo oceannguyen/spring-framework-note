@@ -6,7 +6,7 @@ In a Java application, developers generally use the concept of utility class to 
 
 **DataSource** is the factory for data source connections similar to ```DriverManager``` in JDBC, which helps in connection management
 
-*With the help of the JDBC driver**: One can use the following class to configure the simplest way to get an object of **DataSource**:
+* **With the help of the JDBC driver**: One can use the following class to configure the simplest way to get an object of **DataSource**:
 
     * **SingleConnectionDataSource**: As we already discussed, this returns a single connection
 
