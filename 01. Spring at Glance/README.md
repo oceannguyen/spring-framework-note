@@ -45,33 +45,3 @@ Template cho những yêu cầu khác nhau là một thứ được framework cu
 ## Layered architecture
 
 Không như Struts và Hibernate cung cấp các giải pháp web liên tục tương ứng, Spring có một phạm vi rộng các modules cho các vấn đề phát triển doanh nghiệp lớn. Kiến trúc phân tầng giúp devs chọn bất kỳ một hoặc nhiều modules để viết solutions cho ứng dụng của họ. Ví dụ chọn Web MVC module để xử lý web request mà không cần biết các modules có sắn khác trong framework.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
