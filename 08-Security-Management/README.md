@@ -203,9 +203,9 @@ Trong đó:
 
 * **remember-me-parameter**: Tên thuộc tính trong ```checkbox``` input.
 * **token-validity-seconds**: Thời gian mà ```remember-me``` cookie tồn tại, tính theo đơn vị giây.
-* **data-source-ref**: Thuộc tính này được sử dụng trong trường hợp ta muốn lưu trữ thông tin trong dataase. *By default, the simple hash-based token approach is cookie-based*.
+* **data-source-ref**: Thuộc tính này được sử dụng trong trường hợp ta muốn lưu trữ thông tin trong database. *By default, the simple hash-based token approach is cookie-based*.
 
-- Update trong tag ```<http``` như sau:
+- Update trong tag ```<http>``` như sau:
 ```
 <security:remember-me remember-me-parameter="rem-me"> 
 </security:remember-me> 
@@ -219,7 +219,7 @@ Trong đó:
     name="rem-me"></td> 
 </tr> 
 ```
-Tham khảo [video](https://www.youtube.com/watch?v=9HgREWvDsYk) này để hiểu rõ về chức năng remember-me]
+Tham khảo [video](https://www.youtube.com/watch?v=9HgREWvDsYk) này để hiểu rõ về chức năng remember-me
 
 ## Logout
 
@@ -239,9 +239,9 @@ Trong đó:
 Người dùng có thể truy cập bao nhiêu phiên làm việc cùng một lúc với tài khoản của họ? Spring Session management cung cấp tính năng giúp 'ngăn' việc người dùng chia sẻ tài khoản của họ để truy cập cho nhiều nơi.
 
 Spring session management và ```HttpSession``` có điểm gì khác nhau:
-* **Problems handling multiple accounts**: Spring Framework cho phép tùy chỉnh để một người dùng có thể có nhiều phiên làm việc mà không phải login vào tài khoản khác.
+* **Problems handling multiple accounts**: Thông thường, chúng ta thường có nhiều hơn 1 account, một dùng cho cá nhân và một dùng cho văn phòng. Khi sử dụng ```HttpSession``` để kiểm tra user có đang đăng nhập hay không, user phải logout từ tài khoản và sau đó đăng nhập vào tài khoản khác nữa. Do vậy Spring Framework cho phép chúng ta cấu hình nhiều sessions cho mỗi user mà ko phải loggout từ một tài khoản rồi lại đăng nhập vào tài khoản khác.
 
-* **Multiple sessions per login**: Quản lý phiên theo truyền thống (```HttpSession```) với tài khoản người dùng sử dụng đăng nhập khó để duy trì nhiều roles. Người dùng phải login vào tài khoản khác để sử dụng role mong muốn.
+* **Multiple sessions per login**: Quản lý phiên theo truyền thống (```HttpSession```) với tài khoản người dùng khó để duy trì nhiều roles. Người dùng phải login vào tài khoản khác để sử dụng role mong muốn.
 
 * **Accessing session data**: Spring cung cấp các APIs cho phép lấy thông tin phiên làm việc dựa trên ID của phiên.
 
@@ -250,7 +250,7 @@ Spring session management và ```HttpSession``` có điểm gì khác nhau:
 Sử dụng session để lưu trữ dữ liệu thế nào một cách hiệu quả và tin cậy thế nào?
 Làm sao để nhận biết rằng phiên làm việc người dùng có liên kết với ```request``` hay nói cách khác ```user``` đó quyền truy cập đến *incomming request* không?
 
-* **The data store**: Spring không định nghĩa cụ thể các *underlying data store* thay đó cung cấp các interfaces cho phép developer implementation. Những interfaces cung cấp để hỗ trợ lưu trữ dữ liệu là: ```Session```, ```ExpiringSession``` và ```SessionRepository```
+* **The data store**: Spring không định nghĩa cụ thể các *underlying data store* thay vào đó cung cấp các interfaces cho phép developer implementation. Những interfaces cung cấp để hỗ trợ lưu trữ dữ liệu là: ```Session```, ```ExpiringSession``` và ```SessionRepository```
 
 * **The session determination**: Luôn được liên kết với ```request``` để biết phiên làm việc nào được liên kết với *upcoming request* nào
 
