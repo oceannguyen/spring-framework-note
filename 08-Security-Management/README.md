@@ -1,4 +1,43 @@
-## Configuring AuthenticationManager
+## 1. Core components of Spring Security
+
+### 1.1. SecurityContextHolder
+
+One major aspect of security is storing the information of the principal currently used by the application. It is held by the security context of the application.
+
+> The principal is the user who has currently logged in to the application.
+
+### 1.2. Authentication 
+
+To store the information about the principal, Spring Security uses the object of *Authentication*. The following piece of code demonstrates how to get the *SecurityContext* object and get the principal used:
+
+```
+SecurityContextHolder context = SecurityContextHolder.getContext(); 
+Authentication auth= context.getAuthentication(); 
+Object appl_principal=auth.getPrincipal(); 
+```
+
+### 1.3. UserDetailsService
+
+*UserDetailsService* is another core interface in the Spring Security framework that is used to retrieve data related to the user. This obtained information is stored in *UserDeatails*, which represents the principal. We can get the user information as shown in the following lines of code:
+
+```
+if(appl_principal instance of UserDetails) 
+{ 
+  String username=((UserDetails)app_principal).getUsername(); 
+} 
+```
+
+### 1.4. GrantedAuthority
+
+How will we get the information about which role the users are holding? *GrantedAuthority* is the answer.
+
+*GrantedAuthority* provides information about the authority granted to the principal. The object of *GrantedAuthority* will be obtained from the instance of *Authentication* using the *getAuthorities()* method.
+
+### 1.5. AuthenticationManager
+
+The *AuthenticationManager* interface facilitates authenticating the requests
+
+## 2. Configuring AuthenticationManager
 
 Sử dụng ```AuthenticationManager``` để cung cấp thông tin về các roles gán cho các users, được thực hiện như sau:
 ```java,xml
@@ -15,7 +54,7 @@ Sử dụng ```AuthenticationManager``` để cung cấp thông tin về các ro
     </security:authentication-provider>
 </security:authentication-manager>
 ```
-### Adding security
+### 2.1. Adding security
 
 Chỉ định resources ta muốn giới hạn truy cập thông qua:
 * Thêm filter mapping cho ```DelegatingFilterProxy``` là một ```filter``` trong web.xml
@@ -135,7 +174,7 @@ Spring hỗ trợ nhiều các providers xác thực bên thứ 3 (third-party a
 
 > **JDBC authentication**
 
-### In-memory authentication
+### 2.2. In-memory authentication
 
 Tiện lợi trong trường hợp developers không muốn lãng phí thời gian cấu hình database. Được thực hiện như sau:
 ```java
@@ -158,7 +197,7 @@ abc=abc,ROLE_USER,enabled
 xyz=xyz,ROLE_USER,ROLE_ADMIN,enabled 
 ```
 
-### The JDBC authentication
+### 2.3. The JDBC authentication
 
 Spring security hỗ trợ việc sử dụng ```UserDetailsService``` để đọc thông tin xác thực từ database tables sử dụng Spring-JDBC. Sau đây kịch bản cấu hình đơn giản:
 
@@ -185,7 +224,7 @@ ALTER TABLE authorities ADD CONSTRAINT fk_authorities_users foreign key
 </bean> 
 ```
 
-### The Remember-Me authentication
+### 2.4. The Remember-Me authentication
 
 Trong một kịch bản websites cần nhớ identity của người dùng giữa các sessions. Việc này có thực hiện bằng việc add tính năng **remember-me**. Mặc định, Spring cho phép thêm tính năng ```remember-me``` qua việc thêm ```token``` dựa trên ```cookies``` đến ```response```. ```remember-me cookie``` được add phía client, chứa các dữ liệu sau:
 * **username**: This is to identify the logged-in principal.
@@ -221,7 +260,7 @@ Trong đó:
 ```
 Tham khảo [video](https://www.youtube.com/watch?v=9HgREWvDsYk) này để hiểu rõ về chức năng remember-me
 
-## Logout
+### 2.5. Logout
 
 Standard configuration để cấu hình logout trong ```<http>``` như sau:
 ```java
@@ -234,7 +273,7 @@ Trong đó:
 * **delete-cookies**:  Chỉ định giá trị để xóa cookies đã được lưu phía client khi loggout.
 * **invalidate-session**: This is the attribute used to invalidate the session after logging out
 
-## Managing the Session
+### 2.6. Managing the Session
 
 Người dùng có thể truy cập bao nhiêu phiên làm việc cùng một lúc với tài khoản của họ? Spring Session management cung cấp tính năng giúp 'ngăn' việc người dùng chia sẻ tài khoản của họ để truy cập cho nhiều nơi.
 
@@ -245,7 +284,7 @@ Spring session management và ```HttpSession``` có điểm gì khác nhau:
 
 * **Accessing session data**: Spring cung cấp các APIs cho phép lấy thông tin phiên làm việc dựa trên ID của phiên.
 
-## Working of the Spring session
+### 2.7. Working of the Spring session
 
 Sử dụng session để lưu trữ dữ liệu thế nào một cách hiệu quả và tin cậy thế nào?
 Làm sao để nhận biết rằng phiên làm việc người dùng có liên kết với ```request``` hay nói cách khác ```user``` đó quyền truy cập đến *incomming request* không?
@@ -280,7 +319,7 @@ Thuộc tính ```create-session``` có thể là các giá trị sau:
 </session-management> 
 ```
 
-## Method-level security
+### 2.8. Method-level security
 
 Spring Framework cùng tạo thuận lợi trong việc security ở mức các phương thức
 
@@ -295,7 +334,7 @@ Spring Framework cùng tạo thuận lợi trong việc security ở mức các 
 ```
 Có nghĩa rằng chỉ user có quyền được chỉ định mới được truy cập tới phương thức
 
-### @PreAuthorize and @PostAuthorize
+### 2.9. @PreAuthorize and @PostAuthorize
 
 ```java
     @PreAuthorize("hasRole('ROLE_ADMIN')") 
@@ -332,3 +371,74 @@ public interface UserService {
 | isRememberMe() | This is used to determine whether the user is a remember-me user. | 
 | isAuthenticated() | This is used to determine whether the user is anonymous or not. | 
 | hasPermission(target_object, permission_object) | This expression evaluates that the target object has the specified permissions whether to invoke the method or not. | 
+
+## HttpSecurity
+
+```
+protected void configure(HttpSecurity http) throws Exception {
+	http
+		.authorizeRequests()
+			.anyRequest().authenticated()
+			.and()
+		.formLogin()
+			.and()
+		.httpBasic();
+}
+```
+
+## Java Configuration and Form Login
+
+```
+protected void configure(HttpSecurity http) throws Exception {
+	http
+		.authorizeRequests()
+			.anyRequest().authenticated()
+			.and()
+		.formLogin()
+			.loginPage("/login")
+			.permitAll();   
+}
+```
+
+##  Authorize Requests
+
+```
+protected void configure(HttpSecurity http) throws Exception {
+	http
+		.authorizeRequests()                                                                
+			.antMatchers("/resources/**", "/signup", "/about").permitAll()                  
+			.antMatchers("/admin/**").hasRole("ADMIN")                                      
+			.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")            
+			.anyRequest().authenticated()                                                   
+			.and()
+		// ...
+		.formLogin();
+}
+```
+
+## Handling Logouts
+
+```
+protected void configure(HttpSecurity http) throws Exception {
+	http
+		.logout()                                                                
+			.logoutUrl("/my/logout")                                                 
+			.logoutSuccessUrl("/my/index")                                           
+			.logoutSuccessHandler(logoutSuccessHandler)                              
+			.invalidateHttpSession(true)                                             
+			.addLogoutHandler(logoutHandler)                                        
+			.deleteCookies(cookieNamesToClear)                                       
+			.and()
+		...
+}
+```
+
+###  LogoutHandler
+
+Generally, LogoutHandler implementations indicate classes that are able to participate in logout handling. They are expected to be invoked to perform necessary clean-up.
+
+For example: clearing remember me
+
+### LogoutSuccessHandler
+
+he LogoutSuccessHandler is called after a successful logout by the LogoutFilter, to handle e.g. redirection or forwarding to the appropriate destination.
