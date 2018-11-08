@@ -40,6 +40,7 @@ The *AuthenticationManager* interface facilitates authenticating the requests
 ## 2. Configuring AuthenticationManager
 
 Sử dụng ```AuthenticationManager``` để cung cấp thông tin về các roles gán cho các users, được thực hiện như sau:
+
 ```xml
 <security:authentication-manager>
     <security:authentication-provider>
@@ -57,7 +58,8 @@ Sử dụng ```AuthenticationManager``` để cung cấp thông tin về các ro
 ### 2.1. Adding security
 
 Chỉ định resources ta muốn giới hạn truy cập thông qua:
-* Thêm filter mapping cho ```DelegatingFilterProxy``` là một ```filter``` trong web.xml
+* Thêm filter mapping cho ```DelegatingFilterProxy``` là một ```filter``` trong ```web.xml```
+
 ```xml
 <filter>
     <filter-name>springSecurityFilterChain</filter-name>
