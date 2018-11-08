@@ -202,7 +202,7 @@ xyz=xyz,ROLE_USER,ROLE_ADMIN,enabled
 Spring security hỗ trợ việc sử dụng ```UserDetailsService``` để đọc thông tin xác thực từ database tables sử dụng Spring-JDBC. Sau đây kịch bản cấu hình đơn giản:
 
 * Đầu tiên, cần tạo bảng quan hệ:
-```
+```sql
 CREATE TABLE users ( 
    username VARCHAR(50) NOT NULL PRIMARY KEY, 
    password VARCHAR(50) NOT NULL, 
@@ -217,7 +217,7 @@ ALTER TABLE authorities ADD CONSTRAINT fk_authorities_users foreign key
  (username) REFERENCES users(username); 
 ```
 * Tiếp theo ta cần cấu hình bean cho ```UserDetailsService```
-```java,xml
+```xml
 <bean id="userDetailsService" class=     
   "org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl"> 
     <property name="dataSource" ref="dataSource"/> 
@@ -232,7 +232,7 @@ Trong một kịch bản websites cần nhớ identity của người dùng gi�
 * **MD5 hash**: This contains a combination of username and expirationTime, plus the password and the predefined key.
 
 Cấu hình ```remember-me``` được chỉ định theo:
-```java
+```xml
 <security:remember-me remember-me-parameter="some_valid_name" 
   token-validity-seconds="validity_in_seconds"
   data-source-ref="if_for_dataSource_bean"_> 
@@ -374,7 +374,7 @@ public interface UserService {
 
 ## HttpSecurity
 
-```
+```java
 protected void configure(HttpSecurity http) throws Exception {
 	http
 		.authorizeRequests()
@@ -388,7 +388,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 ## Java Configuration and Form Login
 
-```
+```java
 protected void configure(HttpSecurity http) throws Exception {
 	http
 		.authorizeRequests()
@@ -402,7 +402,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 ##  Authorize Requests
 
-```
+```java
 protected void configure(HttpSecurity http) throws Exception {
 	http
 		.authorizeRequests()                                                                
@@ -418,7 +418,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 ## Handling Logouts
 
-```
+```java
 protected void configure(HttpSecurity http) throws Exception {
 	http
 		.logout()                                                                
