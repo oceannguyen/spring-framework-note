@@ -10,7 +10,7 @@ One major aspect of security is storing the information of the principal current
 
 To store the information about the principal, Spring Security uses the object of *Authentication*. The following piece of code demonstrates how to get the *SecurityContext* object and get the principal used:
 
-```
+```java
 SecurityContextHolder context = SecurityContextHolder.getContext(); 
 Authentication auth= context.getAuthentication(); 
 Object appl_principal=auth.getPrincipal(); 
@@ -20,7 +20,7 @@ Object appl_principal=auth.getPrincipal();
 
 *UserDetailsService* is another core interface in the Spring Security framework that is used to retrieve data related to the user. This obtained information is stored in *UserDeatails*, which represents the principal. We can get the user information as shown in the following lines of code:
 
-```
+```java
 if(appl_principal instance of UserDetails) 
 { 
   String username=((UserDetails)app_principal).getUsername(); 
@@ -40,7 +40,7 @@ The *AuthenticationManager* interface facilitates authenticating the requests
 ## 2. Configuring AuthenticationManager
 
 Sử dụng ```AuthenticationManager``` để cung cấp thông tin về các roles gán cho các users, được thực hiện như sau:
-```java,xml
+```xml
 <security:authentication-manager>
     <security:authentication-provider>
         <security:user-service>
@@ -58,7 +58,7 @@ Sử dụng ```AuthenticationManager``` để cung cấp thông tin về các ro
 
 Chỉ định resources ta muốn giới hạn truy cập thông qua:
 * Thêm filter mapping cho ```DelegatingFilterProxy``` là một ```filter``` trong web.xml
-```java
+```xml
 <filter>
     <filter-name>springSecurityFilterChain</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -70,7 +70,7 @@ Chỉ định resources ta muốn giới hạn truy cập thông qua:
 ```
 * Tạo file *spring-security.xml* trong thư mục ```WEB-INF``` để ánh xạ các ràng buộc security
 * Thêm basic ```<http``` element sau:
-```java
+```xml
 <security:http> 
   <security:intercept-url pattern="/data.htm"
     access="hasRole('ROLE_USER')" /> 
@@ -79,7 +79,7 @@ Chỉ định resources ta muốn giới hạn truy cập thông qua:
 ```
 
 Vì có nhiều file config được sử dụng trong Spring context, phải thêm ```contextConfigLocation``` để chỉ định danh sách các files được sử dụng để khởi tạo
-```java,xml
+```xml
 <servlet> 
     <servlet-name>security</servlet-name> 
     <servlet-class> 
@@ -110,7 +110,7 @@ Luồng của ứng dụng được được thực hiện như sau:
 Trên đây đã sử dụng ```basic authentication``` cho ta thấy phương hướng để add security vào trong ứng dụng như thế nào. Nhưng ta có thể tùy chỉnh được form đăng nhập không? Sau khi đăng nhập thành công/lỗi cần phải forward người dùng tới trang nào? Vì vậy tiếp sau đây sẽ giới thiệu về ```form-based authentication``` cho phép ta tùy chỉnh trang đăng nhập và một số luồng liên quan.
 
 - Để config theo ```form-based authentication``` ta update cấu hình như đã trình bày như sau:
-```java,xml
+```xml
 <security:http> 
     <security:intercept-url pattern="/data.htm" 
       access="hasRole('ROLE_USER')" /> 
@@ -128,7 +128,7 @@ Trong đó:
 > ```csrf```: **cross-site request forgery** (CSRF) là disabled để ngăn chặn lỗ hổng tấn công dựa trên mượn quyền đăng nhập
 
 - Tiếp theo update ```controller``` như sau:
-```java,xml
+```java
 @RequestMapping("/mylogin.htm") 
 public ModelAndView login() 
 { 
@@ -435,10 +435,10 @@ protected void configure(HttpSecurity http) throws Exception {
 
 ###  LogoutHandler
 
-Generally, LogoutHandler implementations indicate classes that are able to participate in logout handling. They are expected to be invoked to perform necessary clean-up.
+Generally, ```LogoutHandler``` implementations indicate classes that are able to participate in logout handling. They are expected to be invoked to perform necessary clean-up.
 
 For example: clearing remember me
 
 ### LogoutSuccessHandler
 
-he LogoutSuccessHandler is called after a successful logout by the LogoutFilter, to handle e.g. redirection or forwarding to the appropriate destination.
+The ```LogoutSuccessHandler``` is called after a successful logout by the ```LogoutFilter```, to handle e.g. redirection or forwarding to the appropriate destination.
