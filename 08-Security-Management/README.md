@@ -312,7 +312,7 @@ Thuộc tính ```create-session``` có thể là các giá trị sau:
 
 > **Concurrent session management**: Đôi khi, developers cần dừng việc tạo nhiều hơn một phiên với mỗi người dùng. Ta có thể cấu hình như sau:
 
-```java
+```xml
 <session-management> 
    <concurrency-control 
       max-sessions="1" error-if-maximum-exceeded="false" /> 
